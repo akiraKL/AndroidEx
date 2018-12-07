@@ -9,16 +9,37 @@ namespace Chapter1App
 {
     public partial class MainPage : ContentPage
     {
+
+
         public MainPage()
         {
             InitializeComponent();
 
-            Content = new Label
+            var colors = new[]
             {
-                Text = "HI Xamarin.Forms!"
+                new { value = Color.White, name = "White"},
+                new { value = Color.Silver, name = "Silver"},
+                new { value = Color.Gray, name = "Gray" },
+                new { value = Color.Red, name = "Red" }
             };
 
-            Padding = new Thickness(0, 40, 0, 0);
+            StackLayout stackLayout = new StackLayout();
+
+            foreach( var color in colors)
+            {
+                stackLayout.Children.Add(
+                    new Label
+                    {
+                        Text = color.name,
+                        TextColor = color.value,
+                        FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label))
+            
+                    });
+            }
+
+            Padding = new Thickness(50, Device.OnPlatform(20, 5, 5), 5, 5);
+            Content = stackLayout;
+
         }
     }
 }
